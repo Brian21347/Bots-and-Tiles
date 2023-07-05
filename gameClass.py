@@ -4,8 +4,8 @@ from vector import Vector2d
 
 class Game:
     tiles: list['Vector2d'] = list()  # there are no tiles in the beginning
-    curr_player_num = 0
-
+    curr_player_num = 0  # orthogonal
+    orthogonal_offset = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
     def __init__(self, player_locations: tuple['Vector2d'], board_size: 'Vector2d') -> None:
         self.players = [playerClass.Player(pos, board_size) for pos in player_locations]
@@ -41,8 +41,7 @@ class Game:
     def remove_lost(self) -> None:
         """Removes a player of the game if the current player cannot move."""
         pos = self.curr_player.pos
-        offsets = [[1, 0], [0, 1], [-1, 0], [0, -1]]
-        for offset in offsets:
+        for offset in self.orthogonal_offset:
             if pos + offset not in self.tiles and pos + offset not in self.player_pos:
                 break
         else:

@@ -1,4 +1,7 @@
-vector2d_like: 'Vector2d' | list[int | float, int | float] | tuple[int | float, int | float]
+from typing import Union
+
+
+vector2d_like = Union['Vector2d', list[int | float, int | float], tuple[int | float, int | float]]
 
 
 class Vector2d:
